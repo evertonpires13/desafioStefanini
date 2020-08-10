@@ -1,0 +1,68 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Nov 7, 2017, 3:35:52 PM
+    Author     : frfroes
+*/
+
+.marquee {
+    width: 100%;
+    background-color: #191a25;
+    color: white;
+    white-space: nowrap;
+    overflow: hidden;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.marquee p {
+    color: #fff;
+    font-weight: bold;
+    display: inline-block;
+    padding-left: 100%;
+    letter-spacing: 2px;
+    font-family: 'Orbitron';
+    animation: marquee 45s linear infinite;
+    text-transform: uppercase;
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #FF9900, 0 0 35px #FF9900, 0 0 40px #FF9900, 0 0 50px #FF9900, 0 0 75px #FF9900
+
+}
+
+.marquee:hover p {
+    webkit-animation-play-state: paused;
+    -moz-animation-play-state: paused;
+    -o-animation-play-state: paused;
+    animation-play-state: paused;
+}
+
+.important-message-modal .ui-widget-header {
+    background-color: #343434;
+}
+
+.important-message-modal .ui-widget-header > span {
+    color: #fff;
+    font-weight: bold;
+    letter-spacing: 2px;
+    font-size: 25px;
+    font-family: 'Orbitron';
+}
+
+.important-message-modal.ui-dialog .ui-dialog-titlebar {
+    padding: 20px 12px;
+}
+
+.important-message-modal.ui-dialog .ui-widget-content {
+    font-size: 15px;
+}
+
+.important-message-modal.ui-dialog .ui-widget-content li {
+    margin: 15px;
+}
+
+@keyframes marquee {
+    0%   { transform: translate(0, 0); }
+    100% { transform: translate(-100%, 0); }
+}

@@ -1,0 +1,197 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/manhattan"
+                template="/WEB-INF/template.xhtml"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:define name="title"> .:: Cadastro de Nacionalidade ::. </ui:define>
+
+    <ui:define name="head"> </ui:define>
+
+    <ui:define name="content">
+
+        <div class="ui-g dashboard">
+
+            <div class="ui-g-12 ui-lg-12 global-sales">
+                <h:form id="formulario">
+                    <p:messages showDetail="true" autoUpdate="true" closable="true" escape="false" />
+                    <p:growl id="msgs" showDetail="true" escape="false"/>
+
+                    <p:panel class="shadow-box ui-shadow-2" id="panelModelo">
+                        <f:facet name="header">
+                            Nacionalidade <span class="header-helper">Cadastro / Pesquisa</span>
+                        </f:facet>
+
+
+                        <!-- Pesquisa -->
+                        <h3>Dados da Nacionalidade:</h3>
+
+                        <div class="ui-g single-search-grid subcontent">
+
+                            <div class="ui-g-6">  
+                                <p:outputLabel value="Sigla:"/><br/>
+                                <p:inputText style="width:40%;" value="#{nacionalidadeBean.modelo.sigla}"/>
+                            </div>
+
+                            <div class="ui-g-6">  
+                                <p:outputLabel value="Descrição:"/><br/>
+                                <p:inputText style="width:80%;" value="#{nacionalidadeBean.modelo.descricao}"/>
+                            </div>
+
+                            <div class="ui-g-6">  
+
+                            </div>
+
+                            <div class="ui-g-12">
+
+                                <p:commandButton
+                                    icon="fa fa-fw fa-cubes" 
+                                    value="Salvar"
+                                    ajax="true"
+                                    update=" :formulario"
+                                    actionListener="#{nacionalidadeBean.onSave}" />
+
+                                <p:commandButton
+                                    icon="fa fa-fw fa-cubes" 
+                                    value="Novo Registro"
+                                    update=":formulario"
+                                    actionListener="#{nacionalidadeBean.onNew}" />
+
+                                <p:commandButton
+                                    value="Pesquisar"
+                                    icon="fa fa-search" 
+                                    oncomplete="PF('addObj').show()" />
+                            </div>
+
+                        </div>
+
+
+
+                        <h3>Resultados da busca:</h3>
+
+                        <div class="ui-g subcontent infinite-scroll-grid">
+
+                            <div class="ui-g-12">
+                                <p:dataTable 
+                                    emptyMessage="Nenhum registro encontrado"
+                                    var="resultList" 
+                                    value="#{nacionalidadeBean.modeloList}"
+                                    id="result-table"
+                                    rows="10"
+                                    paginator="true"                                    
+                                    rowsPerPageTemplate="5,10,15">
+
+                                    <f:facet name="header">
+                                        Nacionalidade
+                                        <span class="header-helper">Registros Encontrados :  <h:outputText value="#{nacionalidadeBean.modeloList.size()}" /> </span>
+                                    </f:facet>
+
+                                    <p:column headerText="Sigla" style="text-align: left">
+                                        <h:outputText value="#{resultList.sigla}"  />
+                                    </p:column>
+
+                                    <p:column headerText="Descrição" style="text-align: left">
+                                        <h:outputText value="#{resultList.descricao}"  />
+                                    </p:column>
+
+                                    <p:column headerText="Cadastro" style="text-align: left">
+                                        <h:outputText value="#{resultList.cadastroData.time}">
+                                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+                                        </h:outputText>
+                                    </p:column>
+
+                                    <p:column headerText="Alteração" style="text-align: left">
+                                        <h:outputText value="#{resultList.alteracaoData.time}">
+                                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+                                        </h:outputText>
+                                    </p:column>
+
+                                    <p:column headerText="Editar" style="width: 40px">
+                                        <p:commandButton update=":formulario" actionListener="#{nacionalidadeBean.onEdit(resultList.id)}" icon="fa fa-fw fa-edit"/>
+                                    </p:column>
+
+                                    <p:column headerText="Excluir" style="width: 40px">
+
+                                        <p:commandButton  icon="fa fa-fw fa-trash" update=":formulario" actionListener="#{nacionalidadeBean.onDelete(resultList.id)}">
+                                            <f:setPropertyActionListener value="#{resultList}" target="#{nacionalidadeBean.modelo}" />
+                                            <p:confirm header="Confirmation" message="Deseja realmente excluir este registro?" icon="pi pi-exclamation-triangle" />
+                                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                                <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="fa fa-fw fa-edit" />
+                                                <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="fa fa-fw fa-edit" />
+                                            </p:confirmDialog>   
+                                        </p:commandButton>
+
+                                    </p:column>
+                                </p:dataTable>
+                            </div>
+                        </div>
+                        <!-- Pesquisa -->
+
+
+
+                        <!-- Novo Cadastro --> 
+
+                        <!-- Um painel de cadastro escondido -->
+                        <p:dialog header="Psquisar Nacionalidade" styleClass="default-modal" widgetVar="addObj" modal="true" responsive="true">
+                            <p:outputPanel id="frmJanela">
+                                <div class="ui-g single-search-grid subcontent">
+
+                                    <div class="ui-g-12">  
+                                        <p:outputLabel value="Sigla:"/>
+                                    </div>
+                                    <div class="ui-g-12">  
+                                        <p:inputText 
+                                            style="width:40%;"
+                                            value="#{nacionalidadeBean.pesquisa.sigla}"/>
+                                    </div>
+
+                                    <div class="ui-g-12">  
+                                        <p:outputLabel value="Descrição:"/>
+                                    </div>
+                                    <div class="ui-g-12">  
+                                        <p:inputText 
+                                            style="width:80%;" 
+                                            value="#{nacionalidadeBean.pesquisa.descricao}"/>
+                                    </div>
+
+                                </div>
+
+                                <div class="button-group">
+
+                                    <p:commandButton 
+                                        icon="fa fa-save" 
+                                        value="Pesquisar" 
+                                        styleClass="raised-btn"
+                                        update=":formulario"
+                                        id="salvar-registro-n" 
+                                        actionListener="#{nacionalidadeBean.onFind}"  />
+
+                                    <p:commandButton 
+                                        icon="fa fa-times" 
+                                        value="Fechar Janela" 
+                                        styleClass="raised-btn" 
+                                        id="cancelar-registro"  
+                                        onclick="PF('addObj').hide()"/>
+
+                                </div>
+                            </p:outputPanel>
+                        </p:dialog>
+                        <!-- Um painel de cadastro escondido -->
+                        <!-- Novo Cadastro -->
+
+                    </p:panel>
+
+
+                    <br/>
+                </h:form>
+
+            </div>
+        </div>
+
+
+    </ui:define>
+
+</ui:composition>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      lang="en"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <h:head>
+        
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+        </f:facet>
+        <title><ui:insert name="title">Desafio</ui:insert></title>
+        <h:outputScript name="js/nanoscroller.js" library="manhattan-layout" />
+        <h:outputScript name="js/layout.js" library="manhattan-layout" />
+        <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'/>
+        <ui:insert name="head"/>
+        <script>
+            PrimeFaces.locales['pt'] = {closeText: 'Fechar',
+                prevText: 'Anterior', nextText: 'Próximo', currentText: 'Começo',
+                monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+                dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'], dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
+                weekHeader: 'Semana',
+                firstDay: 0,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: '',
+                timeOnlyTitle: 'Só Horas',
+                timeText: 'Tempo',
+                hourText: 'Hora',
+                minuteText: 'Minuto',
+                secondText: 'Segundo',
+                ampm: false,
+                month: 'Mês',
+                week: 'Semana',
+                day: 'Dia',
+                allDayText: 'Todo o Dia'};
+        </script>
+    </h:head>
+
+    <h:body> 
+
+        <div style="height: 85px;background-color:#fff;z-index: 1;">
+            <div style="height: 85px;position: fixed;box-sizing: border-box;background-color:#F6FAFC;width: 100%;z-index: 1;">
+                <div  style="width:100%;height:5px;background-color: #647984;float:left;z-index: 1;" >  </div>
+                <img src="/img/logoEstado.png" style="float:left;z-index: 1;"/>
+                <img src="/img/sigip_eventos.png" style="float: left;height: 40px;margin-top: 26px;;z-index: 1;"/>  
+            </div>
+        </div>
+
+        <div class="layout-wrapper">
+
+            <ui:include src="./sidebar.xhtml" />
+
+            <div class="layout-main">
+                <ui:include src="./topbar.xhtml" /> 
+
+                <div class="layout-content">
+
+                  
+                            <ui:insert name="content"/>
+                        
+
+                </div>
+
+                <ui:include src="./footer.xhtml" />
+
+                <div class="layout-main-mask"></div>
+            </div>
+            <ui:include src="./rightpanel.xhtml" />  
+
+        </div>
+        <div class="div-centralizada">
+            <p:ajaxStatus style="width:32px;height:32px;right:7px;bottom:7px">
+                <f:facet name="start">
+                    <i id="spinner" class="fa fa-circle-o-notch fa-spin ajax-loader" aria-hidden="true"></i>
+                    <span id="buscando">Carregando...</span>
+                </f:facet>
+
+                <f:facet name="complete">
+                    <h:outputText value="" />
+                </f:facet>
+            </p:ajaxStatus>
+        </div>
+        <a id="toTop" href="#" class="fa fa-arrow-up"></a>
+
+        <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+
+        <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+            <p:graphicImage name="aguarde/aguarde.gif" />
+        </p:dialog>
+
+        <h:outputStylesheet name="css/nanoscroller.css" library="manhattan-layout" />
+        <h:outputStylesheet name="css/animate.css" library="manhattan-layout" />
+        <h:outputStylesheet name="css/layout-blue.css" library="manhattan-layout" />
+        <h:outputStylesheet name="css/advanced-search.css" library="custom" />
+        <h:outputStylesheet name="css/marquee.css" library="custom" />
+        <h:outputStylesheet name="css/style.css" library="custom" />
+        <h:outputScript name="js/advanced-search.js" library="custom" />
+        <h:outputScript name="js/scripts.js" library="custom" />
+    </h:body>
+
+</html>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config
+    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+    version="2.2">
+    
+    <!--
+    <managed-bean>
+        <managed-bean-name>usuarioBean</managed-bean-name>
+        <managed-bean-class>br.unip.dsd.bean.UsuarioBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    -->
+    
+    <application>
+       <!-- <message-bundle>br.unip.dsd.mensagens.MensagensAplicacao</message-bundle> -->
+        <locale-config>
+            <default-locale>br</default-locale>
+            <supported-locale>en</supported-locale>
+        </locale-config>
+        <el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>   
+    </application>
+    
+     <component>
+        <component-type>br.com.desafio.stefanini.desafiostefanini.componente.ManhattanMenu</component-type>
+        <component-class>br.com.desafio.stefanini.desafiostefanini.componente.ManhattanMenu</component-class>
+    </component>
+    
+    <render-kit>
+        <renderer>
+            <component-family>br.com.desafio.stefanini.desafiostefanini.componente</component-family>
+            <renderer-type>br.com.desafio.stefanini.desafiostefanini.componente.ManhattanMenuRenderer</renderer-type>
+            <renderer-class>br.com.desafio.stefanini.desafiostefanini.componente.ManhattanMenuRenderer</renderer-class>
+        </renderer>
+    </render-kit>
+    
+     <converter>
+        <converter-id>simpleIndexConverter</converter-id>
+        <converter-class>br.com.desafio.stefanini.desafiostefanini.converter.SpringRepositoryConverter</converter-class>
+     
+    </converter>
+    
+</faces-config>

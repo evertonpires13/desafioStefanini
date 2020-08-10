@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition 
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:pa="http://primefaces.org/manhattan">
+
+        <div class="layout-topbar" style="z-index: 1">
+
+            <a href="#" class="menu-btn">
+                <i class="fa fa-bars"></i>
+            </a>
+
+            <div class="topbar-search">
+
+                <h:form onsubmit="/corregedoria/ocorrencia / administrativa / window">
+                  
+                    <p:inputText placeholder="Nome Pessoa.." style="ui-widget" styleClass="ui-widget" disabled="true"/>
+                    
+                    <i class="fa fa-search"></i>
+
+                </h:form>
+            </div>
+
+            <div class="layout-topbar-menu-wrapper" >            
+                <ul class="topbar-menu animated">
+                    <li class="profile-item">
+
+
+                        <a href="#">
+                            <p:graphicImage name="images/avatar_img.png" library="manhattan-layout" />
+
+                            <span class="topbar-item-name profile-name">
+                               Usuário
+                            </span>
+                        </a>
+                    </li>
+
+                </ul>
+
+
+            </div>
+        </div>
+
+    </ui:composition>
+</html>

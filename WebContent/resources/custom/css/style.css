@@ -1,0 +1,441 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Sep 11, 2017, 11:46:11 AM
+    Author     : frfroes
+*/
+/*Divisões e layout*/
+.content .ui-tabs-panel {
+    padding-bottom: 15px !important;
+}
+.subcontent {
+    margin-left: 10px;
+    margin-bottom: 50px;
+    padding: 15px 0;
+    border-left: 1px dashed #d3d3d3;
+}
+.subcontent:last-child{
+    margin-bottom: 0px;
+}
+.subcontent.form-group label.ui-outputlabel {
+    display: block;
+    margin: 5px 0;
+}
+
+.subcontent.form-group .ui-inputfield {
+    width: 100%;
+}
+
+.subcontent.form-group .ui-selectonemenu {
+    width: calc(100% - 28px);
+}
+
+.subcontent.form-group .ui-autocomplete {
+    width: calc(100% - 40px);
+}
+
+.subcontent .subcontent-section .section-title {
+    margin-bottom: 15px;
+    white-space: nowrap;
+}
+
+.subcontent .subcontent-section {
+    margin-left: 15px;
+}
+
+.subcontent .subcontent-section .section-title {
+    width: 100%;
+    display: flex;
+}
+
+.subcontent .subcontent-section .section-title hr {
+    align-self: center;
+    width: 100%;
+    height: 1px;
+    margin: 0 200px 0 20px;
+    background-color: #d3d3d3;
+    border: none;
+}
+
+/* Modal */
+.default-modal {
+    position: absolute;
+    margin: 100px 0px;
+    
+}
+
+.default-modal .ui-panelgrid td:not(.button-group) {
+    text-align: left !important;
+}
+
+.default-modal .to-include-table {
+    padding: 0 12px;
+    max-width: 780px;
+}
+.default-modal .to-include-table table {
+    margin: 15px 0px;     
+}
+.default-modal .to-include-table > label {
+    font-size: initial;
+}
+
+.default-modal td.button-group {
+    padding-right: 29px !important;
+}
+.default-modal td.button-group .ui-button-text{
+       font-size: 12;
+       padding-top: 3px;
+       padding-bottom: 3px
+}
+
+/* Grupo de botões de ação */
+.button-group, 
+.ui-datatable-footer {
+    text-align: right !important;
+}
+
+.button-group  button {
+    margin-bottom: 10px; 
+    width:150px;
+}
+
+.big-button-group {
+    text-align: center;
+}
+
+.big-button-group button {
+    border-radius: 50%;
+    height: 75px;
+    width: 75px;
+    transition: transform ease-in-out 0.2s 0s;
+}
+
+.big-button-group button:hover{
+    transform: scale(1.1);
+}
+
+.big-button-group button .ui-button-icon-left {
+    position: relative;
+    width: auto;
+    text-align: center;
+    left: 0;
+    margin: 0;
+    font-size: 30px;
+    margin-top: 0 !important;
+}
+
+.big-button-group button.vertical-icon .ui-button-icon-left {
+    font-size: 40px;
+}
+
+.big-button-group button .ui-button-text {
+    color: #434560;
+    font-weight: bold;
+    position: absolute;
+    padding: 0 !important;
+    white-space: nowrap;
+    bottom: -25%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/*Busca Única*/
+.single-search-grid .ui-chips, 
+.single-search-grid .ui-chips .ui-chips-container {
+/*.single-search-grid .ui-chips .ui-chips-input-token:last-child,
+.single-search-grid .ui-chips .ui-chips-input-token input{*/
+    width: 100%;
+    height: 33px;
+    font-size: 15px;
+}
+
+.single-search-grid .ui-chips .ui-chips-input-token input{
+    font-size: 15px;
+    padding: 5px 0px;
+}
+
+.single-search-grid button {
+    height: 33px;
+}
+
+.single-search-grid table button,
+.single-search-grid table button .ui-button-text{
+    font-size: 12px;
+    height: unset;
+    padding: 3px 8px 3px 14px !important;
+}
+
+/*Busca Ocorrencia PC*/
+.advanced-search {
+    padding-right: 50px;
+}
+.ocorrency-number > input:first-of-type,
+.ocorrency-number > input:nth-of-type(2) {
+    width: 20px !important;
+}
+.ocorrency-number > input:last-of-type {
+    width: 43px !important;
+}
+
+.period-selector input {
+    width: 68px !important;
+}
+.period-selector > span:nth-child(2){
+    padding: 0 5px;
+}
+.ocorrency-number span,
+.period-selector span{
+    background-color: #FFF;
+    display: flex;
+    align-items: center;
+}
+.radio-group > * {
+    background-color: #FFF;
+}
+.multiselect-tags ul li{
+   float: left;
+}
+.multiselect-tags ul li:nth-child(2n+1){
+   clear: left;
+}
+
+/*Resumo Ocorrencia*/
+
+.ocorrency-details .ui-datatable .ui-datatable-tablewrapper th:nth-child(2){
+    width: 150px;
+}
+
+.ocorrency-details .ui-datatable .ui-datatable-tablewrapper td {
+    text-align: center;
+}
+
+
+/*Scroll Infinito*/
+.infinite-scroll-grid {
+    text-align: center;
+}
+
+.infinite-scroll-grid .ui-datascroller-loader {
+    padding: 0px 10px;
+}
+
+.infinite-scroll-grid .ui-datascroller-loader > * {
+    margin: 6px 0;
+}
+
+.infinite-scroll-grid .ui-datascroller .ui-datascroller-header,
+.infinite-scroll-grid .ui-datascroller .ui-datascroller-content {
+    padding: 0px;
+}
+
+.infinite-scroll-grid .ui-datascroller-item:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.infinite-scroll-grid .ui-datascroller-item > table > tbody > tr > td {
+    position: relative;
+}
+
+.infinite-scroll-grid .ui-datascroller-item .fa {
+    position: absolute;
+    top: 5px;
+    right: 15px;
+}
+
+.infinite-scroll-grid .ui-datascroller-header tr:first-of-type,
+.infinite-scroll-grid .ui-datascroller-item tr:first-of-type,
+.infinite-scroll-grid .action-buttons tr {
+    display: flex;
+    justify-content: center;
+}
+
+.infinite-scroll-grid .ui-datascroller-header tr:first-of-type > td,
+.infinite-scroll-grid .ui-datascroller-item tr:first-of-type > td {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.infinite-scroll-grid .ui-datascroller-item table:not(.action-buttons) > td:last-child{
+    padding: 0;
+}
+
+.infinite-scroll-grid .action-buttons tr .ui-outputpanel > .ui-widget {
+    margin: 3px;
+}
+.infinite-scroll-grid .ui-datascroller-list .ui-datascroller-item:not(:last-child) {
+    border-bottom: 1px solid #dbe1e6;
+    padding: 5px 0;
+}
+
+.infinite-scroll-grid .ui-datascroller-list .ui-datascroller-item:nth-child(even) {
+    background-color: rgba(211, 211, 211, 0.2);
+}
+
+
+/*Tabela secundária*/
+.secondary-table {
+  font-size: 12px;
+}
+.secondary-table table th {
+    padding: 5px !important;
+}
+
+
+/*Sobrescritas para correção do Layout*/
+.dashboard .global-sales table tbody tr {
+    border-top: none !important;
+}
+
+body .ajax-loader {
+	font-size: 45px;
+    right: 155px;
+    position: absolute;
+    bottom: 0px;
+    -webkit-text-stroke: white 1px;
+    -webkit-text-fill-color: #336B8C;
+}
+
+/*body #spinner {
+	position:relative;
+}*/
+
+body #buscando {
+	color: #336B8C;
+    font-weight: bold;
+    font-size: 25px;
+    margin-left: -118px;
+    -webkit-text-stroke: white 1px;
+    -webkit-text-fill-color: #336B8C;
+}
+
+.div-centralizada{
+	position: fixed;
+	top: calc(50% + -40px);
+	left: calc(50% + 103px);
+}
+
+
+.dashboard .global-sales table tbody tr td,
+.dashboard .global-sales table tbody tr td:nth-child(1),
+.dashboard .global-sales table tbody tr td:nth-child(3){
+    font-weight: normal;
+}
+
+.dashboard .ui-outputlabel {
+    /*color: #808080;*/
+    font-weight: bold;
+}
+.ui-datatable-scrollable-body .ui-datatable-scrollable-theadclone {
+    display: none;
+}
+.ui-datatable-scrollable-body tbody tr:first-child td {
+    border-top-color: transparent;
+}
+.advanced-search .search-field .ui-selectonemenu-label, 
+.advanced-search .search-field .ui-selectonemenu-trigger,
+.advanced-search .search-field .ui-selectoneradio .ui-radiobutton{
+    cursor: pointer;
+}
+
+/*Date time picker*/
+.date-time-container > span:not(:first-child) {
+    margin: 0 5px;
+}
+.date-time-container .ui-calendar > input {
+    width: 100px;
+}
+
+/*Efeitos*/
+.collapse {
+    overflow: hidden;
+    height: 0;
+    padding: 0;
+}
+
+.collapse.in{
+    height: auto;
+    padding: inherit;
+}
+
+
+.action-link {
+    display: flex;
+}
+.action-link > * {
+    cursor: pointer;
+}
+.action-link span {
+    align-self: center;
+    margin-left: 10px;
+}
+
+.ui-menu-list .ui-separator {
+    width: 85%; 
+    border-bottom: solid 1px #dbe1e6;
+    display: block;
+    margin: 0 auto;
+    float: none;
+}
+
+.ui-selectcheckboxmenu.ui-selectcheckboxmenu-multiple .ui-selectcheckboxmenu-multiple-container.ui-inputfield {
+     box-sizing: border-box;
+}
+
+.ui-selectcheckboxmenu-multiple .ui-selectcheckboxmenu-trigger .ui-icon{
+    top: 0;
+}
+
+.ui-tooltip .ui-tooltip-text .ui-datalist-content.ui-widget-content {
+    background-color: transparent;
+    border: none;
+}
+
+.ui-tooltip .ui-tooltip-text .ui-datalist-content.ui-widget-content > ul {
+    padding-left: 15px;
+}
+
+.dashboard .global-sales .ui-panel-content {
+    padding: 14px 9px 14px 9px;
+}
+
+.dashboard .global-sales .search-field table {
+    width: auto;
+}
+
+.ui-datepicker .ui-datepicker-title select {
+    background-color: #fff;
+    border: none;
+    border-radius: 4px;
+    margin: 1px 5px;
+}
+
+.ui-datepicker .ui-datepicker-title{
+    display: flex;
+    justify-content: center;
+}
+
+.ui-growl {
+    margin-top: 43px;
+}
+
+body .ui-autocomplete .ui-autocomplete-dropdown {
+    top: 0;
+    right: -40px;
+}
+
+#toTop {
+    position: fixed;
+    bottom: 5em;
+    right: 12px;
+    text-decoration: none;
+    color: #f1f1f1;
+    background-color: #336b8ce3;
+    font-size: 18px;
+    padding: 1em;
+    display: none;
+}

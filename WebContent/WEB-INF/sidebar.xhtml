@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:pm="http://primefaces.org/manhattan">
+
+        <div class="layout-sidebar">
+
+            <div class="sidebar-logo">
+
+                <a href="#">
+
+                    <span style="color: #ffffff; font-family: monospace; font-size: 27px; position: absolute; left: 95px; top: 16px; letter-spacing: -4px; transform: scaleX(.8);">
+                        Desafio
+                    </span> 
+
+                </a>
+
+                <a href="#" class="sidebar-anchor animated fadeIn" title="Toggle Menu">
+                    <i class="fa"></i>
+                </a>
+
+            </div>
+
+            <div class="nano">
+                <div class="nano-content sidebar-scroll-content">
+                    <div class="layout-menu-container">
+
+                        <h:form id="menuform">
+
+                            <pm:menu>
+
+                                <p:menuitem id="pm_consultar_atividade" value="Home"  url="/" ajax="true"> 
+                                     
+                                </p:menuitem>
+ 
+                                <p:submenu id="pm_principal_ocorrencia" label="Cadastros" icon="fa fa-users">
+                                    <p:menuitem id="pm_cadastro_pessoa" value="Pessoa" icon="fa fa-id-card" url="/pessoa.xhtml" /> 
+                                    <p:menuitem id="pm_cadastro_nacionalidade" value="Nacionalidade" icon="fa fa-id-card" url="/nacionalidade.xhtml" /> 
+                                </p:submenu>
+
+
+                            </pm:menu>
+
+                        </h:form>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </ui:composition>
+
+</html>
