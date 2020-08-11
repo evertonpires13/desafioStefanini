@@ -11,6 +11,7 @@ import br.com.desafio.stefanini.desafiostefanini.model.Nacionalidade;
 import br.com.desafio.stefanini.desafiostefanini.model.Pessoa;
 import br.com.desafio.stefanini.desafiostefanini.repository.NacionalidadeRepository;
 import br.com.desafio.stefanini.desafiostefanini.repository.PessoaRepository;
+import br.com.desafio.stefanini.desafiostefanini.util.Select;
 import java.util.Calendar;
 import java.util.List;
 import javax.faces.application.FacesMessage;
@@ -33,6 +34,7 @@ public class PessoaBean extends GenericBean<PessoaRepository, Pessoa> {
 
     private List<Nacionalidade> nacionalidades;
     private NacionalidadeRepository nacionalidadeRepository;
+    private List<Select> estados;
 
     /*------------------------------------------------------------------------*/
     @Autowired
@@ -43,6 +45,8 @@ public class PessoaBean extends GenericBean<PessoaRepository, Pessoa> {
         this.nacionalidadeRepository = nacionalidadeRepository;
 
         nacionalidades = nacionalidadeRepository.findAll();
+
+        estados = Utilitario.estados();
 
     }
 
@@ -79,17 +83,20 @@ public class PessoaBean extends GenericBean<PessoaRepository, Pessoa> {
         if (modelo.getNome().isEmpty()) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, Utilitario.NOME_SISTEMA, "Nome é obrigatório."));
             retorno = false;
+            System.out.println("AA");
         }
 
         // Email só é validado se for preenchido
         if (!modelo.getEmail().isEmpty()) {
-            try {
-                InternetAddress emailAddr = new InternetAddress(modelo.getEmail());
-                emailAddr.validate();
-            } catch (Exception e) {
+
+            boolean validEmail = Utilitario.validarEmail(modelo.getEmail());
+            if (!validEmail) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, Utilitario.NOME_SISTEMA, "E-Mail inválido."));
                 retorno = false;
+                System.out.println("bb");
+
             }
+
         }
 
         // Nascimento Obrigatorio
@@ -101,6 +108,7 @@ public class PessoaBean extends GenericBean<PessoaRepository, Pessoa> {
             if (modelo.getNascimento().after(agora.getTime())) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, Utilitario.NOME_SISTEMA, "Esta criança ainda não nasceu."));
                 retorno = false;
+                System.out.println("dd");
 
             }
         }
@@ -109,35 +117,62 @@ public class PessoaBean extends GenericBean<PessoaRepository, Pessoa> {
         if (modelo.getCpf().isEmpty()) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, Utilitario.NOME_SISTEMA, "CPF Obrigatório."));
             retorno = false;
+            System.out.println("cc");
         } else {
 
-            System.out.println(modelo.getCpf());
-             System.out.println(modelo.getCpf());
-              System.out.println(modelo.getCpf());
-               System.out.println(modelo.getCpf());
-                System.out.println(modelo.getCpf());
-                 System.out.println(modelo.getCpf());
-                 
-                 
-                  System.out.println(Utilitario.removerMascaraCPF(modelo.getCpf()));
-                   System.out.println(Utilitario.removerMascaraCPF(modelo.getCpf()));
-                    System.out.println(Utilitario.removerMascaraCPF(modelo.getCpf()));
-                     System.out.println(Utilitario.removerMascaraCPF(modelo.getCpf())); System.out.println(Utilitario.removerMascaraCPF(modelo.getCpf()));
-                      System.out.println(Utilitario.removerMascaraCPF(modelo.getCpf()));
-                     
-                 
-                 
-            CPFValidator cpfValidator = new CPFValidator();
-            try {
-                cpfValidator.assertValid(Utilitario.removerMascaraCPF(modelo.getCpf()));
-            } catch (Exception e) {
+            boolean validCPF = Utilitario.validCPF(modelo.getCpf());
+            if (!validCPF) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, Utilitario.NOME_SISTEMA, "CPF inválido."));
                 retorno = false;
+                System.out.println("nn");
             }
+
+        }
+
+        boolean validarEndereco = validateEndereco();
+        if (!validarEndereco) {
+            retorno = false;
         }
 
         return retorno;
 
+    }
+
+    /*------------------------------------------------------------------------*/
+    /**
+     *
+     * Se houver alguma informação de endereço, ele torna-se obrigatorio
+     *
+     * @return
+     */
+    public boolean validateEndereco() {
+        Boolean retorno = true;
+
+        // Cidade Obrigatorio
+        if (modelo.getCidade().isEmpty()) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, Utilitario.NOME_SISTEMA, "A Cidade do endereço é obrigatório"));
+            retorno = false;
+        }
+
+        // Estado obrigatorio
+        if (modelo.getEstado().isEmpty()) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, Utilitario.NOME_SISTEMA, "O Estado do endereço é obrigatório."));
+            retorno = false;
+        }
+
+        // logradouro obrigatorio
+        if (modelo.getLogradouro().isEmpty()) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, Utilitario.NOME_SISTEMA, "O Logradouro do endereço é obrigatório."));
+            retorno = false;
+        }
+
+        // bairro obrigatorio
+        if (modelo.getBairro().isEmpty()) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, Utilitario.NOME_SISTEMA, "O Bairro do endereço é obrigatório."));
+            retorno = false;
+        }
+
+        return retorno;
     }
 
     /*------------------------------------------------------------------------*/
@@ -154,6 +189,22 @@ public class PessoaBean extends GenericBean<PessoaRepository, Pessoa> {
      */
     public void setNacionalidades(List<Nacionalidade> nacionalidades) {
         this.nacionalidades = nacionalidades;
+    }
+
+    /*------------------------------------------------------------------------*/
+    /**
+     * @return the estados
+     */
+    public List<Select> getEstados() {
+        return estados;
+    }
+
+    /*------------------------------------------------------------------------*/
+    /**
+     * @param estados the estados to set
+     */
+    public void setEstados(List<Select> estados) {
+        this.estados = estados;
     }
     /*------------------------------------------------------------------------*/
 }

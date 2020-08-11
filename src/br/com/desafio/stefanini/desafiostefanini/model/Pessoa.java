@@ -57,21 +57,21 @@ public class Pessoa extends GenericDomain implements Serializable {
     @JoinColumn(name = "nacionalidadeID")
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Nacionalidade nacionalidade;
-    
-    
-    
-    
-    String cidade;
-    String estado;
-    String logradouro;
-    String telefone;
-    
-    
-    
-    
-    
-    
-    
+
+    @Column(name = "cidade", length = 45)
+    private String cidade;
+
+    @Column(name = "estado", length = 2)
+    private String estado;
+
+    @Column(name = "logradouro", length = 100)
+    private String logradouro;
+
+    @Column(name = "bairro", length = 45)
+    private String bairro;
+
+    @Column(name = "complemento", length = 100)
+    private String complemento;
 
     /**
      * @return the id
@@ -210,6 +210,76 @@ public class Pessoa extends GenericDomain implements Serializable {
             return false;
         }
         return true;
+    }
+
+    /**
+     * @return the cidade
+     */
+    public String getCidade() {
+        return cidade;
+    }
+
+    /**
+     * @param cidade the cidade to set
+     */
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    /**
+     * @return the estado
+     */
+    public String getEstado() {
+        return estado;
+    }
+
+    /**
+     * @param estado the estado to set
+     */
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    /**
+     * @return the logradouro
+     */
+    public String getLogradouro() {
+        return logradouro;
+    }
+
+    /**
+     * @param logradouro the logradouro to set
+     */
+    public void setLogradouro(String logradouro) {
+        this.logradouro = logradouro;
+    }
+
+    /**
+     * @return the bairro
+     */
+    public String getBairro() {
+        return bairro;
+    }
+
+    /**
+     * @param bairro the bairro to set
+     */
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    /**
+     * @return the complemento
+     */
+    public String getComplemento() {
+        return complemento;
+    }
+
+    /**
+     * @param complemento the complemento to set
+     */
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
     }
 
 }

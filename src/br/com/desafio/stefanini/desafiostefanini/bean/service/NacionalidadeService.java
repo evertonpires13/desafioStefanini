@@ -7,7 +7,6 @@ package br.com.desafio.stefanini.desafiostefanini.bean.service;
 
 import br.com.desafio.stefanini.desafiostefanini.model.Nacionalidade;
 import br.com.desafio.stefanini.desafiostefanini.repository.NacionalidadeRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,13 +14,8 @@ import org.springframework.stereotype.Service;
  * @author everton
  */
 @Service
-public class NacionalidadeService {
+public class NacionalidadeService extends GenericService<NacionalidadeRepository, Nacionalidade> {
 
-    @Autowired
-    private NacionalidadeRepository nacionalidadeRepository;
-
-    public void save(Nacionalidade nacionalidade) {
-        nacionalidadeRepository.save(nacionalidade);
-    }
+    
 
 }

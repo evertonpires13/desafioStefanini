@@ -75,6 +75,38 @@
                                 </p:selectOneMenu>
                             </div>
 
+                            <div class="ui-g-6">  </div>
+
+                            <div class="ui-g-6">  
+                                <p:outputLabel value="Logradouro:"/><br/>
+                                <p:inputText style="width:90%;" value="#{pessoaBean.modelo.logradouro}"/>
+                            </div>
+
+
+                            <div class="ui-g-6">  
+                                <p:outputLabel value="Bairro:"/><br/>
+                                <p:inputText style="width:40%;" value="#{pessoaBean.modelo.bairro}"/>
+                            </div>
+
+                            <div class="ui-g-6">  
+                                <p:outputLabel value="Cidade:"/><br/>
+                                <p:inputText style="width:40%;" value="#{pessoaBean.modelo.cidade}"/>
+                            </div>
+
+                            <div class="ui-g-6">  
+                                <p:outputLabel value="Estado:"/><br/>
+                                <p:selectOneMenu id="estado-pesquisa" value="#{pessoaBean.modelo.estado}" style="width:40%;">
+                                    <f:selectItem itemLabel="Selecione"  />
+                                    <f:selectItems value="#{pessoaBean.estados}" var="estado" itemValue="#{estado.chave}" itemLabel="#{estado.descricao}"/>
+
+                                </p:selectOneMenu>
+                            </div>
+
+                            <div class="ui-g-6">  
+                                <p:outputLabel value="Complemento:"/><br/>
+                                <p:inputText style="width:90%;" value="#{pessoaBean.modelo.complemento}"/>
+                            </div>
+
                             <div class="ui-g-12">
 
                                 <p:commandButton
@@ -97,7 +129,7 @@
                             </div>
 
                         </div>
- 
+
                         <h3>Resultados da busca:</h3>
 
                         <div class="ui-g subcontent infinite-scroll-grid">
@@ -116,6 +148,10 @@
                                         Pessoas
                                         <span class="header-helper">Registros Encontrados :  <h:outputText value="#{pessoaBean.modeloList.size()}" /> </span>
                                     </f:facet>
+
+                                    <p:column headerText="#" style="text-align: left">
+                                        <h:outputText value="#{resultList.id}"  />
+                                    </p:column>
 
                                     <p:column headerText="CPF" style="text-align: left">
                                         <h:outputText value="#{resultList.cpf}"  />
