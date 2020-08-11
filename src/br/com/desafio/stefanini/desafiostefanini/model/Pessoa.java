@@ -57,6 +57,21 @@ public class Pessoa extends GenericDomain implements Serializable {
     @JoinColumn(name = "nacionalidadeID")
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Nacionalidade nacionalidade;
+    
+    
+    
+    
+    String cidade;
+    String estado;
+    String logradouro;
+    String telefone;
+    
+    
+    
+    
+    
+    
+    
 
     /**
      * @return the id
