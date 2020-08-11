@@ -70,44 +70,49 @@ public abstract class GenericBean<T1 extends JpaRepository, T2> implements Seria
     @Transactional(readOnly = false)
     public synchronized void onSave() {
 
-        Boolean registroNovo = false;
-        if (((GenericDomain) modelo).getId() == null) {
-            registroNovo = true;
-            ((GenericDomain) modelo).setCadastroData(Calendar.getInstance());
-        }
-        ((GenericDomain) modelo).setAlteracaoData(Calendar.getInstance());
+        if (validate()) {
+            Boolean registroNovo = false;
+            if (((GenericDomain) modelo).getId() == null) {
+                registroNovo = true;
+                ((GenericDomain) modelo).setCadastroData(Calendar.getInstance());
+            }
+            ((GenericDomain) modelo).setAlteracaoData(Calendar.getInstance());
 
-        try {
+            try {
 
-            T2 modeloSalvo = (T2) modeloRepository.saveAndFlush(modelo);
-            if (modeloSalvo != null) {
+                T2 modeloSalvo = (T2) modeloRepository.saveAndFlush(modelo);
+                if (modeloSalvo != null) {
 
-                if (registroNovo) {
-                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, Utilitario.NOME_SISTEMA, "Registro adicionado com sucesso."));
+                    if (registroNovo) {
+                        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, Utilitario.NOME_SISTEMA, "Registro adicionado com sucesso."));
+                    } else {
+                        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, Utilitario.NOME_SISTEMA, "Registro atualizado com sucesso."));
+                    }
+
+                    modelo = getInstanceOfbean();
+                    modeloList = modeloRepository.findAll();
+
                 } else {
-                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, Utilitario.NOME_SISTEMA, "Registro atualizado com sucesso."));
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, Utilitario.NOME_SISTEMA, "Erro ao salvar <strong>Registro</strong>."));
                 }
 
-                modelo = getInstanceOfbean();
-                modeloList = modeloRepository.findAll();
-
-            } else {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, Utilitario.NOME_SISTEMA, "Erro ao salvar <strong>Registro</strong>."));
+            } catch (org.hibernate.exception.ConstraintViolationException e) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, Utilitario.NOME_SISTEMA, "Sr(a) Usuário, este CPF já foi encontrado no sistema."));
+            } catch (Exception e) {
+                e.printStackTrace();
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, Utilitario.NOME_SISTEMA, "Sr(a) Usuário, encontramos um erro fatal de sistema. Não conseguimos processar sua solicitação. (<strong>" + e.toString() + "</strong>)."));
             }
 
-        } catch (org.hibernate.exception.ConstraintViolationException e) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, Utilitario.NOME_SISTEMA, "Sr(a) Usuário, este CPF já foi encontrado no sistema."));
-        } catch (Exception e) {
-            e.printStackTrace();
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, Utilitario.NOME_SISTEMA, "Sr(a) Usuário, encontramos um erro fatal de sistema. Não conseguimos processar sua solicitação. (<strong>" + e.toString() + "</strong>)."));
+            System.gc();
         }
-
-        System.gc();
 
     }
 
     /*------------------------------------------------------------------------*/
     public abstract void onFind();
+
+    /*------------------------------------------------------------------------*/
+    public abstract boolean validate();
 
     /*------------------------------------------------------------------------*/
     public void onNew() {

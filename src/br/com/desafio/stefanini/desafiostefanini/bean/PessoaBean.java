@@ -11,7 +11,6 @@ import br.com.desafio.stefanini.desafiostefanini.model.Nacionalidade;
 import br.com.desafio.stefanini.desafiostefanini.model.Pessoa;
 import br.com.desafio.stefanini.desafiostefanini.repository.NacionalidadeRepository;
 import br.com.desafio.stefanini.desafiostefanini.repository.PessoaRepository;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import javax.faces.application.FacesMessage;
@@ -21,6 +20,7 @@ import javax.mail.internet.InternetAddress;
 import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 /**
  *
@@ -28,6 +28,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @ManagedBean(name = "pessoaBean")
+@Service
 public class PessoaBean extends GenericBean<PessoaRepository, Pessoa> {
 
     private List<Nacionalidade> nacionalidades;
@@ -38,11 +39,11 @@ public class PessoaBean extends GenericBean<PessoaRepository, Pessoa> {
     public PessoaBean(PessoaRepository modeloRepository, NacionalidadeRepository nacionalidadeRepository) {
 
         super(modeloRepository);
-        
-        this.nacionalidadeRepository=nacionalidadeRepository;
 
-        nacionalidades = nacionalidadeRepository.findAll() ;
-        
+        this.nacionalidadeRepository = nacionalidadeRepository;
+
+        nacionalidades = nacionalidadeRepository.findAll();
+
     }
 
     /*------------------------------------------------------------------------*/
@@ -64,22 +65,12 @@ public class PessoaBean extends GenericBean<PessoaRepository, Pessoa> {
     }
 
     /*------------------------------------------------------------------------*/
-    
-    public void combo(){
-         nacionalidades = nacionalidadeRepository.findAll() ;
+    public void combo() {
+        nacionalidades = nacionalidadeRepository.findAll();
     }
+
     /*------------------------------------------------------------------------*/
-    
     @Override
-    public void onSave() {
-
-        if (validate()) {
-            super.onSave();
-        }
-
-    }
-
-    /*------------------------------------------------------------------------*/
     public boolean validate() {
 
         Boolean retorno = true;
@@ -120,9 +111,25 @@ public class PessoaBean extends GenericBean<PessoaRepository, Pessoa> {
             retorno = false;
         } else {
 
+            System.out.println(modelo.getCpf());
+             System.out.println(modelo.getCpf());
+              System.out.println(modelo.getCpf());
+               System.out.println(modelo.getCpf());
+                System.out.println(modelo.getCpf());
+                 System.out.println(modelo.getCpf());
+                 
+                 
+                  System.out.println(Utilitario.removerMascaraCPF(modelo.getCpf()));
+                   System.out.println(Utilitario.removerMascaraCPF(modelo.getCpf()));
+                    System.out.println(Utilitario.removerMascaraCPF(modelo.getCpf()));
+                     System.out.println(Utilitario.removerMascaraCPF(modelo.getCpf())); System.out.println(Utilitario.removerMascaraCPF(modelo.getCpf()));
+                      System.out.println(Utilitario.removerMascaraCPF(modelo.getCpf()));
+                     
+                 
+                 
             CPFValidator cpfValidator = new CPFValidator();
             try {
-                cpfValidator.assertValid(modelo.getCpf());
+                cpfValidator.assertValid(Utilitario.removerMascaraCPF(modelo.getCpf()));
             } catch (Exception e) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, Utilitario.NOME_SISTEMA, "CPF inválido."));
                 retorno = false;

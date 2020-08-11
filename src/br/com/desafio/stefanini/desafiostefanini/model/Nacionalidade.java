@@ -31,10 +31,10 @@ public class Nacionalidade extends GenericDomain implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "sigla", length = 5)
+    @Column(name = "sigla", length = 5, nullable = false)
     private String sigla;
 
-    @Column(name = "descricao", length = 80)
+    @Column(name = "descricao", length = 80, nullable = false)
     private String descricao;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL}, mappedBy = "nacionalidade", orphanRemoval = true)
@@ -51,6 +51,7 @@ public class Nacionalidade extends GenericDomain implements Serializable {
     public boolean equals(Object obj) {
 
         try {
+            
             if (this == obj) {
                 return true;
             }
@@ -67,6 +68,7 @@ public class Nacionalidade extends GenericDomain implements Serializable {
             if (!Objects.equals(this.id, other.id)) {
                 return false;
             }
+            
         } catch (Exception e) {
             e.printStackTrace();
         }

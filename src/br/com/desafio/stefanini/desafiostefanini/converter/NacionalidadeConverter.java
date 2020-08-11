@@ -8,13 +8,15 @@ package br.com.desafio.stefanini.desafiostefanini.converter;
 import br.com.desafio.stefanini.desafiostefanini.repository.NacionalidadeRepository;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author everton
  */
+@Service
 @Component
 @Scope("request")
-public class NacionalidadeConverter  extends SpringRepositoryConverter<NacionalidadeRepository> {
+public class NacionalidadeConverter extends SpringRepositoryConverter<NacionalidadeRepository> {
     
 }

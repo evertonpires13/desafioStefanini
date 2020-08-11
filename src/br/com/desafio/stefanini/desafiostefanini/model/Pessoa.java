@@ -5,9 +5,11 @@
  */
 package br.com.desafio.stefanini.desafiostefanini.model;
 
+import br.com.desafio.stefanini.desafiostefanini.util.Utilitario;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -26,7 +28,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "pessoa")
-public class Pessoa  extends GenericDomain implements Serializable  {
+public class Pessoa extends GenericDomain implements Serializable {
 
     @Id
     @Column(name = "pessoaID")
@@ -41,7 +43,7 @@ public class Pessoa  extends GenericDomain implements Serializable  {
 
     @Column(name = "sexo", length = 2)
     private String sexo;
-    
+
     @Column(name = "email", length = 45)
     private String email;
 
@@ -53,44 +55,8 @@ public class Pessoa  extends GenericDomain implements Serializable  {
     private String naturalidade;
 
     @JoinColumn(name = "nacionalidadeID")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Nacionalidade nacionalidade;
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 13 * hash + Objects.hashCode(this.id);
-        
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Pessoa other = (Pessoa) obj;
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        return true;
-    }
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
 
     /**
      * @return the id
@@ -110,14 +76,15 @@ public class Pessoa  extends GenericDomain implements Serializable  {
      * @return the cpf
      */
     public String getCpf() {
-        return cpf;
+        return Utilitario.adicionarMascaraCPF(cpf);
+
     }
 
     /**
      * @param cpf the cpf to set
      */
     public void setCpf(String cpf) {
-        this.cpf = cpf;
+        this.cpf = Utilitario.removerMascaraCPF(cpf);
     }
 
     /**
@@ -202,6 +169,32 @@ public class Pessoa  extends GenericDomain implements Serializable  {
      */
     public void setNacionalidade(Nacionalidade nacionalidade) {
         this.nacionalidade = nacionalidade;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 13 * hash + Objects.hashCode(this.id);
+
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Pessoa other = (Pessoa) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
     }
 
 }
