@@ -14,13 +14,11 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 /**
  *
  * @author everton
  */
-@Component
 @ViewScoped
 @ManagedBean(name = "nacionalidadeBean")
 public class NacionalidadeBean extends GenericBean<NacionalidadeRepository, Nacionalidade> {
@@ -37,7 +35,7 @@ public class NacionalidadeBean extends GenericBean<NacionalidadeRepository, Naci
     @Override
     public void onFind() {
 
-        if (!pesquisa.getDescricao().isBlank() || !pesquisa.getSigla().isEmpty()) {
+        if (!pesquisa.getDescricao().isEmpty() || !pesquisa.getSigla().isEmpty()) {
 
             String sigla = getPesquisa().getSigla().isEmpty() ? "%" : "%" + getPesquisa().getSigla().replaceAll(" ", "%") + "%";
             String descricao = getPesquisa().getDescricao().isEmpty() ? "%" : "%" + getPesquisa().getDescricao().replaceAll(" ", "%") + "%";
